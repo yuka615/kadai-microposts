@@ -32,6 +32,8 @@ class User extends Authenticatable
         return $this->hasMany(Micropost::class);
     }
     
+    // 10.1 add
+    
     public function followings()
     {
         return $this->belongsToMany(User::class, 'user_follow', 'user_id', 'follow_id')->withTimestamps();
@@ -44,9 +46,9 @@ class User extends Authenticatable
     
     public function follow($userId)
     {
-        // confirm if already following
+        // *Are you following it already?* confirm if already following
         $exist = $this->is_following($userId);
-        // confirming that it is not you
+        // *Is it not yourself?* confirming that it is not you
         $its_me = $this->id == $userId;
     
         if ($exist || $its_me) {
@@ -61,9 +63,9 @@ class User extends Authenticatable
     
     public function unfollow($userId)
     {
-        // confirming if already following
+        // *Are you following it already?* confirming if already following
         $exist = $this->is_following($userId);
-        // confirming that it is not you
+        // *Is it not yourself?* confirming that it is not you
         $its_me = $this->id == $userId;
     
     
@@ -81,6 +83,8 @@ class User extends Authenticatable
     public function is_following($userId) {
         return $this->followings()->where('follow_id', $userId)->exists();
     }
+    
+    // 11.1 add
     
     public function feed_microposts(){
         $follow_user_ids = $this->followings()-> pluck('users.id')->toArray();
