@@ -62,4 +62,19 @@ class UsersController extends Controller
 
         return view('users.followers', $data);
     }
+    
+    public function likes($id)
+    {
+        $user = User::find($id);
+        $followers = $user->followers()->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'users' => $followers,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.likes', $data);
+    }
 }

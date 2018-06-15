@@ -18,12 +18,13 @@
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
                     {!! Form::close() !!}
                     
-                    <!--{!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}-->
-                    <!--    {!! Form::submit('Like', ['class' => 'btn btn-default btn-xs']) !!}-->
-                    <!--{!! Form::close() !!}-->
+                    
                     
                 @endif
                 
+                {!! Form::open(['route' => ['users.likes', $micropost->id], 'method' => 'likes']) !!}
+                        {!! Form::submit('Like', ['class' => 'btn btn-default btn-xs']) !!}
+                {!! Form::close() !!}
                 
             </div>
         </div>

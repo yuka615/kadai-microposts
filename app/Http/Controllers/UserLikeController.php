@@ -17,4 +17,6 @@ class UserLikeController extends Controller
         \Auth::user()->unlike($id);
         return redirect()->back();
     }
+    
+    
 }

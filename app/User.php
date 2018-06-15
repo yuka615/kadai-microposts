@@ -140,7 +140,7 @@ class User extends Authenticatable
     }
     
     
-    public function is_liking($Id) {
-        return $this->likes()->where('like_id', $Id)->exists();
+    public function is_liking($userId) {
+        return $this->likes()->where('like_id', $userId)->exists();
     }
 }
