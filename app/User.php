@@ -91,4 +91,56 @@ class User extends Authenticatable
         $follow_user_ids[] = $this->id;
         return Micropost::whereIn('user_id', $follow_user_ids);
     }
+    
+    // kadai add
+    
+    public function likes()
+    {
+        return $this->belongsToMany(User::class, 'user_like', 'user_id', 'like_id')->withTimestamps();
+    }
+
+    public function unlikes()
+    {
+        return $this->belongsToMany(User::class, 'user_like', 'like_id', 'user_id')->withTimestamps();
+    }
+    
+    public function like($userId)
+    {
+        // confirm if already liking
+        $exist = $this->is_liking($userId);
+        // confirming that it is not you
+        $its_me = $this->id == $userId;
+    
+        if ($exist || $its_me) {
+            // do nothing if already liking
+            return false;
+        } else {
+            // lik if not liking
+            $this->likes()->attach($userId);
+            return true;
+        }
+    }
+    
+    public function unlike($userId)
+    {
+        // confirming if already liking
+        $exist = $this->is_liking($userId);
+        // confirming that it is not you
+        $its_me = $this->id == $userId;
+    
+    
+        if ($exist && !$its_me) {
+            // stop liking if liking
+            $this->likes()->detach($userId);
+            return true;
+        } else {
+            // do nothing if not liking
+            return false;
+        }
+    }
+    
+    
+    public function is_liking($Id) {
+        return $this->likes()->where('like_id', $Id)->exists();
+    }
 }
