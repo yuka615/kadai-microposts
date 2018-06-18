@@ -19,7 +19,7 @@
                     {!! Form::close() !!}
                 @endif
                 
-                {!! Form::open(['route' => ['microposts.store', $micropost->id], 'method' => 'likes']) !!}
+                {!! Form::open(['route' => ['user.like', $micropost->id], 'method' => 'post']) !!}
                         {!! Form::submit('Like', ['class' => 'btn btn-default btn-xs']) !!}
                 {!! Form::close() !!}
                 

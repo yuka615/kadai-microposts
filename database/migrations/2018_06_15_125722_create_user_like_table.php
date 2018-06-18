@@ -21,7 +21,7 @@ class CreateUserLikeTable extends Migration
             
             // Foreign key setting
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('like_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('like_id')->references('id')->on('microposts')->onDelete('cascade');
 
             // Do not allow duplication of combination of user_id and follow_id
             $table->unique(['user_id', 'like_id']);

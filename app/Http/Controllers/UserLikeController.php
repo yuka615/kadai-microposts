@@ -10,6 +10,8 @@ class UserLikeController extends Controller
     {
         \Auth::user()->like($id);
         return redirect()->back();
+        
+        
     }
 
     public function destroy($id)
