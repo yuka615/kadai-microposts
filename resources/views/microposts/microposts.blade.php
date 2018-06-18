@@ -19,9 +19,13 @@
                     {!! Form::close() !!}
                 @endif
                 
-                {!! Form::open(['route' => ['user.like', $micropost->id], 'method' => 'post']) !!}
-                        {!! Form::submit('Like', ['class' => 'btn btn-default btn-xs']) !!}
-                {!! Form::close() !!}
+                <!--{!! Form::open(['route' => ['user.like', $micropost->id], 'method' => 'post']) !!}-->
+                <!--        {!! Form::submit('Like', ['class' => 'btn btn-default btn-xs']) !!}-->
+                <!--{!! Form::close() !!}-->
+                
+                
+                
+                @include('user_like.like_button', ['user' => $user])
                 
             </div>
         </div>

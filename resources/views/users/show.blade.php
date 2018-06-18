@@ -32,7 +32,6 @@
             @endif
             @if (count($microposts) > 0)
                 @include('microposts.microposts', ['microposts' => $microposts])
-                @include('user_like.like_button', ['microposts' => $microposts])
             @endif
             
         </div>
