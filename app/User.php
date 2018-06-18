@@ -92,26 +92,30 @@ class User extends Authenticatable
         return Micropost::whereIn('user_id', $follow_user_ids);
     }
     
-    // kadai add
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////// kadai add ///////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    
     
     public function likes()
     {
         return $this->belongsToMany(User::class, 'user_like', 'user_id', 'like_id')->withTimestamps();
     }
 
-    public function unlikes()
-    {
-        return $this->belongsToMany(User::class, 'user_like', 'like_id', 'user_id')->withTimestamps();
-    }
+    // public function unlikes()
+    // {
+    //     return $this->belongsToMany(User::class, 'user_like', 'like_id', 'user_id')->withTimestamps();
+    // }
     
     public function like($userId)
     {
         // confirm if already liking
         $exist = $this->is_liking($userId);
         // confirming that it is not you
-        $its_me = $this->id == $userId;
+        // $its_me = $this->id == $userId;
     
-        if ($exist || $its_me) {
+        if ($exist) {//|| $its_me) {
             // do nothing if already liking
             return false;
         } else {
@@ -126,10 +130,10 @@ class User extends Authenticatable
         // confirming if already liking
         $exist = $this->is_liking($userId);
         // confirming that it is not you
-        $its_me = $this->id == $userId;
+        // $its_me = $this->id == $userId;
     
     
-        if ($exist && !$its_me) {
+        if ($exist) {// && !$its_me) {
             // stop liking if liking
             $this->likes()->detach($userId);
             return true;
