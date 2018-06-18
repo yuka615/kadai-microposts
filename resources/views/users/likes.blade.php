@@ -11,7 +11,6 @@
                     <img class="media-object img-rounded img-responsive" src="{{ Gravatar::src($user->email, 500) }}" alt="">
                 </div>
             </div>
-            @include('user_like.like_button', ['user' => $user])
             
         </aside>
         <div class="col-xs-8">
@@ -21,7 +20,7 @@
                 <li role="presentation" class="{{ Request::is('users/*/followers') ? 'active' : '' }}"><a href="{{ route('users.followers', ['id' => $user->id]) }}">Followers <span class="badge">{{ $count_followers }}</span></a></li>
                 <li role="presentation" class="{{ Request::is('users/*/likes') ? 'active' : '' }}"><a href="{{ route('users.likes', ['id' => $user->id]) }}">Likes <span class="badge">{{ $count_likes }}</span></a></li>
             </ul>
-            @include('users.users', ['users' => $users])
+            @include('microposts.microposts', ['user' => $user])
         </div>
     </div>
 @endsection

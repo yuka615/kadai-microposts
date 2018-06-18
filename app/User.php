@@ -100,7 +100,7 @@ class User extends Authenticatable
     
     public function likes()
     {
-        return $this->belongsToMany(User::class, 'user_like', 'user_id', 'like_id')->withTimestamps();
+        return $this->belongsToMany(Micropost::class, 'user_like', 'user_id', 'like_id')->withTimestamps();
     }
 
     // public function unlikes()
